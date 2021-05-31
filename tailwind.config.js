@@ -8,13 +8,15 @@ module.exports = {
           100: "#F9FAFC",
           200: "#EEEFF1",
           250: "#D9DBDD",
+          275: "#AFB2B6",
           300: "#81878C",
         },
         black: {
           100: "#2F363F"
         },
         blue: {
-          100: "#E6F5FF"
+          100: "#E6F5FF",
+          200: "#4AB7FF"
         },
         fontFamily: {
           main: 'Lato'
