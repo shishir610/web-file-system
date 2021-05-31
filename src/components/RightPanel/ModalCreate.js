@@ -5,7 +5,7 @@ const inputStyle = 'border-2 pl-4 rounded-xl h-12 my-2 text-grey-275 text-main w
 const ModalCreate = ({ show }) => {
     const [active, setActive] = useState("Folder")
     return show && (
-        <div id="myModal" className="modal">
+        <div id="modalCreate" className="modal">
             <div className="modal-content">
                 <div className="flex justify-center">
                     <p className="font-main text-lg">Create New</p>

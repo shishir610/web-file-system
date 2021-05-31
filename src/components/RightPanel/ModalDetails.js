@@ -3,7 +3,7 @@ import FFImage from './FFImage';
 
 const Modal = ({ show, type, name, size, creator, date }) => {
     return show && (
-        <div id="myModal" className="modal">
+        <div id="modalDetails" className="modal">
             <div className="modal-content">
                 <div className="flex justify-center">
                     <p className="font-main text-lg">{type.charAt(0).toUpperCase() + type.slice(1)} Info</p>

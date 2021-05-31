@@ -18,6 +18,9 @@ module.exports = {
           100: "#E6F5FF",
           200: "#4AB7FF"
         },
+        red: {
+          500: "#FF5942"
+        },
         fontFamily: {
           main: 'Lato'
         }
