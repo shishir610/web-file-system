@@ -1,0 +1,23 @@
+a {
+    cursor: pointer;
+}
+
+*:focus {
+    outline: none;
+}
+
+.font-main {
+    font-family: 'Lato'
+}
+
+.expand {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .2s ease-out
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
