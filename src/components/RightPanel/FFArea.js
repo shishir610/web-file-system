@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleFolderDoubleClick } from '../../actions';
+import { deleteFileOrFolder } from '../../actions/alterfilestructure';
 import FFContainer from './FFContainer';
 import ModalCreate from './ModalCreate';
 import ModalDetails from './ModalDetails';
@@ -7,14 +9,17 @@ import PopoverOptions from './PopoverOptions';
 
 const FFArea = () => {
     const [selected, setSelected] = useState("")
+    const [selectedType, setSelectedType] = useState("")
     const [customContextMenu, setCustomContextMenu] = useState(false)
     const [rClickPos, setRClickPos] = useState([0, 0])
-    const FF = useSelector(state => state.filesystem)
 
-    const handleFFRightClick = (event, name) => {
-        setSelected(name)
-        setCustomContextMenu(true)
-        setRClickPos([event.clientX, event.clientY])
+    var FF = useSelector(state => state.filesystem)
+    const currentPath = useSelector(state => state.currentpath)
+
+    const dispatch = useDispatch()
+
+    for (let i = 1; i < currentPath.length; i++) {
+        FF = FF.find(o => o.name === currentPath[i]).children
     }
 
     useEffect(() => {
@@ -35,6 +40,22 @@ const FFArea = () => {
             }
         }
     })
+
+    const handleFFRightClick = (event, name, type) => {
+        setSelected(name)
+        setSelectedType(type)
+        setCustomContextMenu(true)
+        setRClickPos([event.clientX, event.clientY])
+    }
+
+    const handleOpen = () => {
+        selectedType === 'folder' &&
+            dispatch(handleFolderDoubleClick(selected))
+    }
+
+    const handleDelete = () => {
+        dispatch(deleteFileOrFolder(currentPath, selected))
+    }
 
     return (
         <div className="flex py-10 px-4 flex-wrap">
@@ -61,6 +82,9 @@ const FFArea = () => {
             <PopoverOptions
                 customContextMenu={customContextMenu}
                 rClickPos={rClickPos}
+                open={selectedType === 'folder'}
+                handleOpen={handleOpen}
+                handleDelete={handleDelete}
             />
         </div>
     );

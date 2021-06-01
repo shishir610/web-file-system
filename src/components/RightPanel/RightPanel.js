@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 
 const RightPanel = () => {
     return (
-        <div className="w-4/5 h-auto p-10">
+        <div className="xl:w-4/5 lg:w-3/4 h-auto p-10">
             <Navbar />
             <FFArea />
         </div>

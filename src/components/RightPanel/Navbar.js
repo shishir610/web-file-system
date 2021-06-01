@@ -1,11 +1,19 @@
 import React, { Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleOneUp } from '../../actions';
 
 const Navbar = () => {
     const path = useSelector(state => state.currentpath)
+    const dispatch = useDispatch()
+
     return (
         <div className="flex items-center">
-            <img src="./icons/upArrow.png" style={{ width: '20px', height: '20px' }} />
+            <img
+                src="./icons/upArrow.png"
+                style={{ width: '20px', height: '20px' }}
+                className="cursor-pointer"
+                onClick={() => dispatch(handleOneUp())}
+            />
             <div className="ml-8 flex-auto">
                 {path.map((item, i) => {
                     const last = i === path.length - 1
