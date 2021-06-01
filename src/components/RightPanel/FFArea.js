@@ -22,7 +22,10 @@ const FFArea = ({ searchActive, searchResults }) => {
 
     const dispatch = useDispatch()
 
+    console.log(FFList);
+
     for (let i = 1; i < currentPath.length; i++) {
+        console.log(currentPath[i])
         FFList = FFList.find(o => o.name === currentPath[i]).children
     }
 

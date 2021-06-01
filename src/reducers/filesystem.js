@@ -17,11 +17,10 @@ const filesystemReducer = (prevState = initialState, action) => {
             }
             return prevState
         case ADD_FILE_FOLDER:
-            const newState = prevState
+            var newState = prevState
             for (let i = 1; i < payload.currentPath.length; i++) {
-                newState = newState.find(o => o.name === currentPath[i]).children
+                newState = newState.find(o => o.name === payload.currentPath[i]).children
             }
-            console.log(payload.type)
             const node = {
                 name: payload.name,
                 type: payload.type,
@@ -31,7 +30,6 @@ const filesystemReducer = (prevState = initialState, action) => {
                 children: []
             }
             newState.push(node)
-            return newState
         default:
             return prevState
     }
