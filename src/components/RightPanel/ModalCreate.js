@@ -33,7 +33,7 @@ const ModalCreate = ({ show }) => {
                     <input className={inputStyle} placeholder="Name" />
                     <input className={inputStyle} placeholder="Creator" />
                     <input className={inputStyle} placeholder="Size" />
-                    <input className={inputStyle} placeholder="Date" />
+                    <input className={inputStyle} placeholder="Date (DD-MM-YYYY)" />
                     <button className="w-3/4 bg-blue-200 h-10 my-4 rounded-xl font-main text-md text-white">
                         Create
                     </button>

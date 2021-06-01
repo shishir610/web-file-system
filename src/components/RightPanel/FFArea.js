@@ -7,39 +7,34 @@ import ModalCreate from './ModalCreate';
 import ModalDetails from './ModalDetails';
 import PopoverOptions from './PopoverOptions';
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
 const FFArea = () => {
     const [selected, setSelected] = useState("")
     const [selectedType, setSelectedType] = useState("")
     const [customContextMenu, setCustomContextMenu] = useState(false)
     const [rClickPos, setRClickPos] = useState([0, 0])
+    const [showModalDetails, setShowModalDetails] = useState(false)
+    const [showModalCreate, setShowModalCreate] = useState(false)
 
-    var FF = useSelector(state => state.filesystem)
+    var FFList = useSelector(state => state.filesystem)
     const currentPath = useSelector(state => state.currentpath)
 
     const dispatch = useDispatch()
 
     for (let i = 1; i < currentPath.length; i++) {
-        FF = FF.find(o => o.name === currentPath[i]).children
+        FFList = FFList.find(o => o.name === currentPath[i]).children
     }
 
     useEffect(() => {
-        window.addEventListener('click', () => {
+        const clickElsewhere = () => {
             setCustomContextMenu(false)
-        })
-    })
-
-    useEffect(() => {
-        let modalDetails = document.getElementById("modalDetails")
-        let modalCreate = document.getElementById("modalCreate")
-        window.onclick = function (event) {
-            if (event.target == modalDetails) {
-                modalDetails.style.display = "none";
-            }
-            if (event.target == modalCreate) {
-                modalCreate.style.display = "none";
-            }
         }
-    })
+
+        window.addEventListener('click', clickElsewhere)
+
+        return () => window.removeEventListener('click', clickElsewhere)
+    }, [])
 
     const handleFFRightClick = (event, name, type) => {
         setSelected(name)
@@ -57,9 +52,32 @@ const FFArea = () => {
         dispatch(deleteFileOrFolder(currentPath, selected))
     }
 
+    const handleGetInfo = () => {
+        setShowModalDetails(true)
+    }
+
+    const selectedFileOrFolder = FFList[FFList.findIndex(ele => ele.name === selected)]
+
+    const convertToDate = (date) => {
+        if (date) {
+            const dateSplit = date.split('-')
+            let day = dateSplit[0]
+            if (day[day.length - 1] === '1' && (day < 10 || day > 20)) {
+                day = Number(day) + 'st'
+            } else if (day[day.length - 1] === '2' && (day < 10 || day > 20)) {
+                day = Number(day) + 'nd'
+            } else if (day[day.length - 1] === '3' && (day < 10 || day > 20)) {
+                day = Number(day) + 'rd'
+            } else {
+                day = Number(day) + 'th'
+            }
+            return `${day} ${MONTHS[dateSplit[1] - 1]}, ${dateSplit[2]}`
+        }
+    }
+
     return (
         <div className="flex py-10 px-4 flex-wrap">
-            {FF.map(item =>
+            {FFList.map(item =>
                 <FFContainer
                     type={item.type}
                     name={item.name}
@@ -72,18 +90,27 @@ const FFArea = () => {
                 <p className="text-5xl text-grey-250">+</p>
             </div>
             <ModalDetails
-                show={false}
-                type={"file"}
-                name="index.html"
+                show={showModalDetails}
+                details={[
+                    ['Name', selected],
+                    ['Size', selectedFileOrFolder?.size],
+                    ['Creator name', selectedFileOrFolder?.creator],
+                    ['Created time', convertToDate(selectedFileOrFolder?.date)]
+                ]}
+                name={selected}
+                type={selectedType}
+                setShowModalDetails={setShowModalDetails}
+                FF={FFList}
             />
             <ModalCreate
-                show={false}
+                show={showModalCreate}
             />
             <PopoverOptions
                 customContextMenu={customContextMenu}
                 rClickPos={rClickPos}
                 open={selectedType === 'folder'}
                 handleOpen={handleOpen}
+                handleGetInfo={handleGetInfo}
                 handleDelete={handleDelete}
             />
         </div>

@@ -19,9 +19,7 @@ const Navbar = () => {
                     const last = i === path.length - 1
                     return (
                         <Fragment>
-                            <a>
-                                <span className={`text-2xl ${last ? 'text-black-100' : 'text-grey-300'}`}>{item}</span>
-                            </a>
+                            <span className={`text-2xl ${last ? 'text-black-100' : 'text-grey-300'}`}>{item}</span>
                             <span className="text-2xl text-grey-300">{!last && ' / '}</span>
                         </Fragment>
                     )
