@@ -1,12 +1,8 @@
 import React, { Fragment } from 'react';
-
-const path = [
-    'root',
-    'Movies',
-    'Inception'
-]
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+    const path = useSelector(state => state.currentpath)
     return (
         <div className="flex items-center">
             <img src="./icons/upArrow.png" style={{ width: '20px', height: '20px' }} />

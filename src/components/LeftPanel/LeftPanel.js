@@ -19,7 +19,7 @@ const constructListItem = (item, itemNumber) => {
 const LeftPanel = () => {
     const FILE_STRUCTURE = useSelector(state => state.filesystem)
     return (
-        <div className="bg-grey-100 w-1/4 h-auto">
+        <div className="bg-grey-100 w-1/5 h-auto">
             <p className="text-grey-300 p-8 pb-4">
                 ROOT
             </p>

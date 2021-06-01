@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import FFContainer from './FFContainer';
 import ModalCreate from './ModalCreate';
 import ModalDetails from './ModalDetails';
 import PopoverOptions from './PopoverOptions';
 
-const FILE_STRUCTURE = [
-    {
-        name: "Apps",
-        type: "folder"
-    },
-    {
-        name: "index.html",
-        type: "file"
-    },
-    {
-        name: "script.js",
-        type: "file"
-    },
-]
-
 const FFArea = () => {
     const [selected, setSelected] = useState("")
     const [customContextMenu, setCustomContextMenu] = useState(false)
     const [rClickPos, setRClickPos] = useState([0, 0])
+    const FF = useSelector(state => state.filesystem)
 
     const handleFFRightClick = (event, name) => {
         setSelected(name)
@@ -50,8 +37,8 @@ const FFArea = () => {
     })
 
     return (
-        <div className="flex py-10 px-4">
-            {FILE_STRUCTURE.map(item =>
+        <div className="flex py-10 px-4 flex-wrap">
+            {FF.map(item =>
                 <FFContainer
                     type={item.type}
                     name={item.name}

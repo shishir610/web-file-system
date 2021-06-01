@@ -4,7 +4,7 @@ import FFImage from './FFImage';
 const FFContainer = ({ type, name, selected, setSelected, handleFFRightClick }) => {
     return (
         <div
-            className={`w-28 h-30 mr-12 flex flex-col justify-center items-center rounded-lg ${selected === name && 'bg-blue-100'}`}
+            className={`w-28 h-30 mr-12 mb-12 flex flex-col justify-center items-center rounded-lg ${selected === name && 'bg-blue-100'}`}
             onClick={() => setSelected(name)}
             // onMouseDown={(event) => {
             //     handleFFRightClick(event, name)
