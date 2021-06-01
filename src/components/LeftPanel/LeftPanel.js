@@ -1,69 +1,29 @@
 import React, { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import ListItem from './ListItem'
+import List from './List'
 
-const FILE_STRUCTURE = [
-    {
-        name: "Apps",
-        type: "folder",
-        children: []
-    },
-    {
-        name: "Pictures",
-        type: "folder",
-        children: []
-    },
-    {
-        name: "Videos",
-        type: "folder",
-        children: []
-    },
-    {
-        name: "Docs",
-        type: "folder",
-        children: [
-            {
-                name: "Work",
-                type: "folder",
-                children: []
-            },
-            {
-                name: "c.pdf",
-                type: "file",
-                children: []
-            },
-            {
-                name: "d.docx",
-                type: "file",
-                children: []
-            },
-        ]
-    },
-    {
-        name: "a.pdf",
-        type: "file",
-        children: []
-    },
-    {
-        name: "b.jpg",
-        type: "file",
-        children: []
-    },
-]
-
-const constructListItem = (item) => {
+const constructListItem = (item, itemNumber) => {
     if (item.children.length !== 0) {
-        item.children.map(constructListItem)
+        return (
+            <List item={item} itemNumber={itemNumber}>
+                {item.children.map((item) => constructListItem(item, itemNumber + 1))}
+            </List>
+        )
     }
-    return <ListItem item={item} hasChildren={!!item.children.length} />
+    else {
+        return <ListItem item={item} itemNumber={itemNumber} />
+    }
 }
 
 const LeftPanel = () => {
+    const FILE_STRUCTURE = useSelector(state => state.filesystem)
     return (
         <div className="bg-grey-100 w-1/4 h-auto">
             <p className="text-grey-300 p-8 pb-4">
                 ROOT
             </p>
-            {FILE_STRUCTURE.map(constructListItem)}
+            {FILE_STRUCTURE.map((item) => constructListItem(item, 0))}
         </div>
     );
 }

@@ -21,7 +21,29 @@ const initialState = [
             {
                 name: "Work",
                 type: "folder",
-                children: []
+                children: [
+                    {
+                        name: "Pictures",
+                        type: "folder",
+                        children: [
+                            {
+                                name: "a.pdf",
+                                type: "file",
+                                children: []
+                            },
+                            {
+                                name: "b.jpg",
+                                type: "file",
+                                children: []
+                            },
+                        ]
+                    },
+                    {
+                        name: "Videos",
+                        type: "folder",
+                        children: []
+                    },
+                ]
             },
             {
                 name: "c.pdf",
