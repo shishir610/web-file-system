@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { handleFolderDoubleClick } from '../../actions';
 import FFImage from './FFImage';
 
-const FFContainer = ({ type, name, selected, setSelected, handleFFRightClick }) => {
+const FFContainer = ({ type, name, selected, setSelected, handleFFRightClick, searchActive }) => {
     const dispatch = useDispatch()
     return (
         <div
-            className={`w-28 h-30 mr-12 mb-12 flex flex-col justify-center items-center rounded-lg ${selected === name && 'bg-blue-100'}`}
-            onClick={() => setSelected(name)}
-            onDoubleClick={type === 'folder' ? () => dispatch(handleFolderDoubleClick(name)) : () => { }}
+            className={`w-28 h-30 mr-4 md:mr-12 mb-4 md:mb-12 flex flex-col justify-center items-center rounded-lg ${selected === name && 'bg-blue-100'}`}
+            onClick={!searchActive ? () => setSelected(name) : () => { }}
+            onDoubleClick={type === 'folder' && !searchActive ? () => dispatch(handleFolderDoubleClick(name)) : () => { }}
             onContextMenu={event => {
                 event.preventDefault()
                 handleFFRightClick(event, name, type)

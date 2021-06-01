@@ -6,7 +6,7 @@ const inputStyle = 'border-2 pl-4 rounded-xl h-12 my-2 text-grey-275 text-main w
 const initState = {
     "name": "",
     "creator": "",
-    "size": 0,
+    "size": null,
     "date": "",
     "type": "folder"
 }
@@ -33,7 +33,7 @@ const ModalCreate = ({ show, setShowModalCreate }) => {
             case "size":
                 setNewFileDetails({
                     ...newFileDetails,
-                    "size": Number(event.target.value)
+                    "size": event.target.value
                 })
                 break
             case "date":

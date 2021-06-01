@@ -16,6 +16,12 @@ a {
     transition: max-height .2s ease-out
 }
 
+@media (max-width: 768px) {
+    .xs-l-w-full {
+        width: 100%;
+    }
+}
+
 /* Modal */
 
 .modal {

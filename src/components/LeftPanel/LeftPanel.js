@@ -19,8 +19,8 @@ const constructListItem = (item, itemNumber) => {
 const LeftPanel = () => {
     const FILE_STRUCTURE = useSelector(state => state.filesystem)
     return (
-        <div className="bg-grey-100 xl:w-1/5 min-w-max h-auto">
-            <p className="text-grey-300 p-8 pb-4">
+        <div className="bg-grey-100 xl:w-1/5 min-w-max h-auto hidden md:block">
+            <p className="text-grey-300 p-8 pb-4 hover:bg-grey-200">
                 ROOT
             </p>
             {FILE_STRUCTURE.map((item) => constructListItem(item, 0))}

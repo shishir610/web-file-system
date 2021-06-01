@@ -17,16 +17,14 @@ const List = ({ item, children, itemNumber }) => {
 
     return (
         <Fragment>
-            <a onClick={handleClick}>
-                <div className={`px-8 ${itemNumber != 0 && 'pl-4'} py-4 ${item.name === "Apps" && 'bg-grey-200'} text-black-100 flex`}>
-                    <div className="w-6/12 font-main">
-                        {item.name}
-                    </div>
-                    <div className="flex w-6/12 justify-end">
-                        <img src="icons/dropdown.svg" />
-                    </div>
+            <div className={`px-8 ${itemNumber != 0 && 'pl-4'} py-4 cursor-pointer hover:bg-grey-200 text-black-100 flex`} onClick={handleClick}>
+                <div className="w-6/12 font-main">
+                    {item.name}
                 </div>
-            </a>
+                <div className="flex w-6/12 justify-end">
+                    <img src="icons/dropdown.svg" />
+                </div>
+            </div>
             <div ref={divRef} className={`expand pl-2 border-l-2 border-grey-250 ${itemNumber == 0 ? 'ml-8' : 'ml-4'}`}>
                 {children}
             </div>

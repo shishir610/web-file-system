@@ -9,7 +9,7 @@ import PopoverOptions from './PopoverOptions';
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-const FFArea = () => {
+const FFArea = ({ searchActive, searchResults }) => {
     const [selected, setSelected] = useState("")
     const [selectedType, setSelectedType] = useState("")
     const [customContextMenu, setCustomContextMenu] = useState(false)
@@ -37,10 +37,12 @@ const FFArea = () => {
     }, [])
 
     const handleFFRightClick = (event, name, type) => {
-        setSelected(name)
-        setSelectedType(type)
-        setCustomContextMenu(true)
-        setRClickPos([event.clientX, event.clientY])
+        if (!searchActive) {
+            setSelected(name)
+            setSelectedType(type)
+            setCustomContextMenu(true)
+            setRClickPos([event.clientX, event.clientY])
+        }
     }
 
     const handleOpen = () => {
@@ -75,23 +77,31 @@ const FFArea = () => {
         }
     }
 
+    const FFOrSearch = searchActive ? searchResults : FFList
+
     return (
-        <div className="flex py-10 px-4 flex-wrap">
-            {FFList.map(item =>
+        <div className="flex py-6 md:py-10 px-4 flex-wrap justify-center md:justify-start">
+            {FFOrSearch.map(item =>
                 <FFContainer
                     type={item.type}
                     name={item.name}
                     selected={selected}
                     setSelected={setSelected}
                     handleFFRightClick={handleFFRightClick}
+                    searchActive={searchActive}
                 />
             )}
-            <div
-                className="flex justify-center items-center h-32 w-28 border-dashed border-grey-250 border-4 rounded-lg cursor-pointer hover:bg-gray-100"
-                onClick={() => setShowModalCreate(true)}
-            >
-                <p className="text-5xl text-grey-250">+</p>
-            </div>
+            {searchActive && FFOrSearch.length === 0 &&
+                <span className='text-2xl text-grey-300 pl-4'>Nothing here yet.</span>
+            }
+            {!searchActive && (
+                <div
+                    className="flex justify-center items-center h-32 w-28 border-dashed border-grey-250 border-4 rounded-lg cursor-pointer hover:bg-gray-100"
+                    onClick={() => setShowModalCreate(true)}
+                >
+                    <p className="text-5xl text-grey-250">+</p>
+                </div>
+            )}
             <ModalDetails
                 show={showModalDetails}
                 details={[
