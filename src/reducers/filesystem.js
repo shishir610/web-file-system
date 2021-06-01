@@ -1,4 +1,4 @@
-import { DELETE_FILE_FOLDER } from "../actions/alterfilestructure";
+import { ADD_FILE_FOLDER, DELETE_FILE_FOLDER } from "../actions/alterfilestructure";
 import initialState from './init/filesystem'
 
 const filesystemReducer = (prevState = initialState, action) => {
@@ -16,6 +16,22 @@ const filesystemReducer = (prevState = initialState, action) => {
                 allChildren.splice(index, 1);
             }
             return prevState
+        case ADD_FILE_FOLDER:
+            const newState = prevState
+            for (let i = 1; i < payload.currentPath.length; i++) {
+                newState = newState.find(o => o.name === currentPath[i]).children
+            }
+            console.log(payload.type)
+            const node = {
+                name: payload.name,
+                type: payload.type,
+                creator: payload.creator,
+                date: payload.date,
+                size: payload.type === 'file' ? payload.size : undefined,
+                children: []
+            }
+            newState.push(node)
+            return newState
         default:
             return prevState
     }

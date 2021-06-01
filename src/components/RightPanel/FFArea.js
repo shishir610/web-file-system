@@ -86,7 +86,10 @@ const FFArea = () => {
                     handleFFRightClick={handleFFRightClick}
                 />
             )}
-            <div className="flex justify-center items-center h-32 w-28 border-dashed border-grey-250 border-4 rounded-lg cursor-pointer hover:bg-gray-100">
+            <div
+                className="flex justify-center items-center h-32 w-28 border-dashed border-grey-250 border-4 rounded-lg cursor-pointer hover:bg-gray-100"
+                onClick={() => setShowModalCreate(true)}
+            >
                 <p className="text-5xl text-grey-250">+</p>
             </div>
             <ModalDetails
@@ -104,6 +107,7 @@ const FFArea = () => {
             />
             <ModalCreate
                 show={showModalCreate}
+                setShowModalCreate={setShowModalCreate}
             />
             <PopoverOptions
                 customContextMenu={customContextMenu}

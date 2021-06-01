@@ -45,7 +45,13 @@ const Modal = ({ show, details, name, type, setShowModalDetails, FF }) => {
                                 {key}:
                             </div>
                             <div className={rightStyle}>
-                                {value ? value : sizeOfFolder + 'kB'}
+                                {
+                                    key === 'Size' ?
+                                        type === 'folder' ?
+                                            sizeOfFolder + 'kB' :
+                                            value + 'kB' :
+                                        value
+                                }
                             </div>
                         </div>
                     )
