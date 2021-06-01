@@ -33,32 +33,17 @@ export default [
                 date: '01-06-2021',
                 children: [
                     {
-                        name: "Pictures",
-                        type: "folder",
+                        name: "e.pdf",
+                        type: "file",
+                        size: 500,
                         creator: 'Shishir',
                         date: '01-06-2021',
-                        children: [
-                            {
-                                name: "a.pdf",
-                                type: "file",
-                                size: 500,
-                                creator: 'Shishir',
-                                date: '01-06-2021',
-                                children: []
-                            },
-                            {
-                                name: "b.jpg",
-                                type: "file",
-                                size: 500,
-                                creator: 'Shishir',
-                                date: '01-06-2021',
-                                children: []
-                            },
-                        ]
+                        children: []
                     },
                     {
-                        name: "Videos",
-                        type: "folder",
+                        name: "f.ts",
+                        type: "file",
+                        size: 500,
                         creator: 'Shishir',
                         date: '01-06-2021',
                         children: []
